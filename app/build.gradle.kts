@@ -10,12 +10,17 @@ android {
     namespace = "com.luscii.sdk.demo"
     compileSdk = 35
 
+    //noinspection WrongGradleMethod
     defaultConfig {
         applicationId = "com.luscii.sdk.demo"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.0"
+        versionCode = versionName
+            ?.split('.')
+            ?.map { it.padStart(3, '0') }
+            ?.joinToString("") { it }
+            ?.toIntOrNull()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
