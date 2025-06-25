@@ -17,10 +17,12 @@ android {
         targetSdk = 35
         versionName = "0.0.0"
         versionCode = versionName
+            ?.takeIf { it != "0.0.0" }
             ?.split('.')
             ?.map { it.padStart(3, '0') }
             ?.joinToString("") { it }
             ?.toIntOrNull()
+            ?: 1
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
