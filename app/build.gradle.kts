@@ -2,19 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.luscii.sdk.demo"
-    compileSdk = 35
+    compileSdk = 36
 
     //noinspection WrongGradleMethod
     defaultConfig {
         applicationId = "com.luscii.sdk.demo"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionName = "0.0.0"
         versionCode = versionName
             ?.takeIf { it != "0.0.0" }
@@ -54,7 +55,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -75,12 +76,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.fragment.ktx)
 
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+    implementation(libs.kotlinx.serialization.core)
 
-    implementation("com.luscii:sdk:0.4.1")
-}
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
-kapt {
-    correctErrorTypes = true
+    implementation(libs.luscii)
 }
