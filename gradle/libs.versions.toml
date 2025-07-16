@@ -18,8 +18,9 @@ nav3Core = "1.0.0-alpha04"
 kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
 lifecycleViewmodelNav3 = "1.0.0-alpha02"
-luscii = "0.21.0"
+luscii = "0.6.0"
 ksp = "2.1.21-2.0.2"
+materialIcons = "1.7.8"
 
 [libraries]
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
@@ -44,6 +45,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3",
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+material-icons = { module = "androidx.compose.material:material-icons-core", version.ref = "materialIcons" }
 
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 
@@ -58,6 +60,6 @@ luscii = { module = "com.luscii:sdk", version.ref = "luscii" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

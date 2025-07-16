@@ -112,7 +112,7 @@ private fun Form(
                 }
             )
 
-            Button(onClick = { onConfirm() }) {
+            Button(onClick = onConfirm) {
                 Text("Confirm & show default Actions screen")
             }
 

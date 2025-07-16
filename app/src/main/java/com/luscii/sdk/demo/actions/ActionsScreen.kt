@@ -7,8 +7,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +32,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun ActionsScreen(
     actionFlowActivityResultContract: LaunchActionFlowActivityResultContract,
+    startMeasurement: (Action.Id) -> Unit,
     viewModel: ActionsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsState()
@@ -38,7 +43,8 @@ fun ActionsScreen(
 
     ActionsScreenContent(
         state,
-        launchActionFlow = { actionFlowLauncher.launch(it) }
+        launchActionFlow = { actionFlowLauncher.launch(it) },
+        startMeasurement = { startMeasurement(it.id)},
     )
 }
 
@@ -47,6 +53,7 @@ fun ActionsScreen(
 private fun ActionsScreenContent(
     state: ActionsState,
     launchActionFlow: (Action) -> Unit,
+    startMeasurement: (Action) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -63,7 +70,11 @@ private fun ActionsScreenContent(
                         )
                     }
 
-                    ActionList(state.actions, onClick = launchActionFlow)
+                    ActionList(
+                        state.actions,
+                        onClick = launchActionFlow,
+                        onTrailingClick = startMeasurement
+                    )
                 }
             }
         }
@@ -71,7 +82,11 @@ private fun ActionsScreenContent(
 }
 
 @Composable
-private fun ActionList(actions: List<Action>, onClick: (Action) -> Unit) {
+private fun ActionList(
+    actions: List<Action>,
+    onClick: (Action) -> Unit,
+    onTrailingClick: (Action) -> Unit = {}
+) {
     Column {
         actions.forEach {
             ListItem(
@@ -86,6 +101,15 @@ private fun ActionList(actions: List<Action>, onClick: (Action) -> Unit) {
                         )
                     }
                 },
+                trailingContent = {
+                    IconButton({ onTrailingClick(it) }) {
+                        Icon(
+                            Icons.Default.Create,
+                            contentDescription = "Start measurement",
+
+                        )
+                    }
+                }
             )
         }
     }

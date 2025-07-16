@@ -6,13 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.luscii.sdk.Luscii
+import com.luscii.sdk.actions.Action
 import com.luscii.sdk.actions.ActionFlowResult
 import com.luscii.sdk.demo.actions.ActionsScreen
+import com.luscii.sdk.demo.actions.measurement.MeasurementScreen
 import com.luscii.sdk.demo.login.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
@@ -34,6 +39,11 @@ class MainActivity : ComponentActivity() {
 
             NavDisplay(
                 backStack = backStack,
+                entryDecorators = listOf(
+                    rememberSceneSetupNavEntryDecorator(),
+                    rememberSavedStateNavEntryDecorator(),
+                    rememberViewModelStoreNavEntryDecorator()
+                ),
                 entryProvider = entryProvider {
                     entry<Login> {
                         LoginScreen(
@@ -43,7 +53,14 @@ class MainActivity : ComponentActivity() {
                     }
 
                     entry<CustomActions> {
-                        ActionsScreen(luscii.createActionFlowActivityResultContract())
+                        ActionsScreen(
+                            luscii.createActionFlowActivityResultContract(),
+                            startMeasurement = { backStack.add(CustomActions.Measurement(it)) }
+                        )
+                    }
+
+                    entry<CustomActions.Measurement> {
+                        MeasurementScreen(it.actionId)
                     }
                 }
             )
@@ -57,6 +74,6 @@ data object Login : NavKey
 @Serializable
 data class CustomActions(val result: ActionFlowResult? = null) : NavKey {
     @Serializable
-    data object Measurement : NavKey
+    data class Measurement(val actionId: Action.Id) : NavKey
 }
 
