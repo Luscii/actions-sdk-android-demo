@@ -26,6 +26,7 @@ import com.luscii.sdk.demo.R
 @Composable
 fun LoginScreen(
     goToActions: () -> Unit,
+    goToSchedule: () -> Unit,
     goToCustomActions: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
@@ -36,6 +37,7 @@ fun LoginScreen(
         if (state is LoginState.LoggedIn) {
             when (state.destination) {
                 is LoginState.LoggedIn.Destination.Actions -> goToActions()
+                is LoginState.LoggedIn.Destination.Schedule -> goToSchedule()
                 is LoginState.LoggedIn.Destination.CustomActions -> goToCustomActions()
             }
         }
@@ -73,6 +75,7 @@ private fun LoginScreenContent(
                     else -> ""
                 },
                 onConfirm = { login(LoginState.LoggedIn.Destination.Actions) },
+                onScheduleConfirm = { login(LoginState.LoggedIn.Destination.Schedule) },
                 onCustomConfirm = { login(LoginState.LoggedIn.Destination.CustomActions) },
             )
         }
@@ -84,7 +87,8 @@ private fun Form(
     state: TextFieldState,
     error: String,
     onConfirm: () -> Unit,
-    onCustomConfirm: () -> Unit
+    onScheduleConfirm: () -> Unit,
+    onCustomConfirm: () -> Unit,
 ) {
     Box(
         Modifier.padding(24.dp),
@@ -114,6 +118,10 @@ private fun Form(
 
             Button(onClick = onConfirm) {
                 Text("Confirm & show default Actions screen")
+            }
+
+            Button(onClick = onScheduleConfirm) {
+                Text("Confirm & show My Schedule screen")
             }
 
             Button(onClick = onCustomConfirm) {

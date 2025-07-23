@@ -8,6 +8,7 @@ sealed interface LoginState {
         sealed interface Destination {
             data object Actions : Destination
             data object CustomActions : Destination
+            data object Schedule : Destination
         }
     }
 }

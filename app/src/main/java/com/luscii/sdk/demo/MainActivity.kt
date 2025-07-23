@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
                     entry<Login> {
                         LoginScreen(
                             goToActions = { luscii.startActionsActivity(this@MainActivity) },
-                            goToCustomActions = { backStack.add(CustomActions()) }
+                            goToSchedule = { luscii.startScheduleActivity(this@MainActivity) },
+                            goToCustomActions = { backStack.add(CustomActions()) },
                         )
                     }
 
