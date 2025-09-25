@@ -7,6 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,7 +46,7 @@ fun ActionsScreen(
     ActionsScreenContent(
         state,
         launchActionFlow = { actionFlowLauncher.launch(it) },
-        startMeasurement = { startMeasurement(it.id)},
+        startMeasurement = { startMeasurement(it.id) },
     )
 }
 
@@ -59,7 +61,7 @@ private fun ActionsScreenContent(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
-        Column(Modifier.padding(innerPadding)) {
+        Column(Modifier.padding(innerPadding).verticalScroll(rememberScrollState())) {
             when (state) {
                 ActionsState.Loading -> LoadingIndicator()
                 is ActionsState.Success -> {
@@ -71,7 +73,19 @@ private fun ActionsScreenContent(
                     }
 
                     ActionList(
-                        state.actions,
+                        state.actionsToday,
+                        onClick = launchActionFlow,
+                        onTrailingClick = startMeasurement
+                    )
+
+                    Text(
+                        "Self care actions",
+                        Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
+                    ActionList(
+                        state.selfCareActions,
                         onClick = launchActionFlow,
                         onTrailingClick = startMeasurement
                     )
@@ -92,13 +106,19 @@ private fun ActionList(
             ListItem(
                 modifier = Modifier.clickable { onClick(it) },
                 headlineContent = { Text(it.name) },
-                supportingContent = it.completedAt?.let { date ->
-                    {
-                        Text(
-                            "Completed at: " +
-                                    date.withZoneSameInstant(ZoneId.systemDefault())
-                                        .format(DateTimeFormatter.RFC_1123_DATE_TIME)
-                        )
+                supportingContent = {
+                    Column {
+                        it.completedAt?.let { date ->
+                            Text(
+                                "Completed at: " +
+                                        date.withZoneSameInstant(ZoneId.systemDefault())
+                                            .format(DateTimeFormatter.RFC_1123_DATE_TIME)
+                            )
+                        }
+
+                        Text("isPlanned: ${it.isPlanned}")
+
+                        Text("isExtra: ${it.isExtraAction}")
                     }
                 },
                 trailingContent = {
@@ -106,7 +126,6 @@ private fun ActionList(
                         Icon(
                             Icons.Default.Create,
                             contentDescription = "Start measurement",
-
                         )
                     }
                 }
