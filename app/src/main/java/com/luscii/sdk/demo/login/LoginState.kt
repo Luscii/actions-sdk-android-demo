@@ -7,8 +7,9 @@ sealed interface LoginState {
     data class LoggedIn(val destination: Destination) : LoginState {
         sealed interface Destination {
             data object Actions : Destination
-            data object CustomActions : Destination
             data object Schedule : Destination
+            data object SelfCare : Destination
+            data object CustomActions : Destination
         }
     }
 }

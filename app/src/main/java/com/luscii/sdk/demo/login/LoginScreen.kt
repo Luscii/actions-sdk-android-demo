@@ -27,6 +27,7 @@ import com.luscii.sdk.demo.R
 fun LoginScreen(
     goToActions: () -> Unit,
     goToSchedule: () -> Unit,
+    goToSelfCare: () -> Unit,
     goToCustomActions: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
@@ -39,6 +40,7 @@ fun LoginScreen(
                 is LoginState.LoggedIn.Destination.Actions -> goToActions()
                 is LoginState.LoggedIn.Destination.Schedule -> goToSchedule()
                 is LoginState.LoggedIn.Destination.CustomActions -> goToCustomActions()
+                is LoginState.LoggedIn.Destination.SelfCare -> goToSelfCare()
             }
         }
     }
@@ -76,6 +78,7 @@ private fun LoginScreenContent(
                 },
                 onConfirm = { login(LoginState.LoggedIn.Destination.Actions) },
                 onScheduleConfirm = { login(LoginState.LoggedIn.Destination.Schedule) },
+                onSelfCareConfirm = { login(LoginState.LoggedIn.Destination.SelfCare) },
                 onCustomConfirm = { login(LoginState.LoggedIn.Destination.CustomActions) },
             )
         }
@@ -88,7 +91,9 @@ private fun Form(
     error: String,
     onConfirm: () -> Unit,
     onScheduleConfirm: () -> Unit,
+    onSelfCareConfirm: () -> Unit,
     onCustomConfirm: () -> Unit,
+
 ) {
     Box(
         Modifier.padding(24.dp),
@@ -124,8 +129,12 @@ private fun Form(
                 Text("Confirm & show My Schedule screen")
             }
 
+            Button(onClick = onSelfCareConfirm) {
+                Text("Confirm & show Self-Care screen")
+            }
+
             Button(onClick = onCustomConfirm) {
-                Text("Confirm & show custom Action screens")
+                Text("Confirm & show custom Action screen")
             }
         }
     }
