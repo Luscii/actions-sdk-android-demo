@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
-
 package com.luscii.sdk.demo.actions
 
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,12 +9,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -63,7 +60,7 @@ private fun ActionsScreenContent(
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding).verticalScroll(rememberScrollState())) {
             when (state) {
-                ActionsState.Loading -> LoadingIndicator()
+                ActionsState.Loading -> CircularProgressIndicator()
                 is ActionsState.Success -> {
                     if (state.lastActionFlowResult != null) {
                         Text(
