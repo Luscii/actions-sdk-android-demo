@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -48,9 +50,13 @@ android {
 
         isCoreLibraryDesugaringEnabled = true
     }
-    kotlinOptions {
-        jvmTarget = "21"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
+        }
     }
+
     buildFeatures {
         compose = true
         dataBinding = true

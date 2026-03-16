@@ -8,11 +8,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
-import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.luscii.sdk.Luscii
 import com.luscii.sdk.actions.Action
 import com.luscii.sdk.actions.ActionFlowResult
@@ -40,8 +38,7 @@ class MainActivity : ComponentActivity() {
             NavDisplay(
                 backStack = backStack,
                 entryDecorators = listOf(
-                    rememberSceneSetupNavEntryDecorator(),
-                    rememberSavedStateNavEntryDecorator(),
+                    rememberSaveableStateHolderNavEntryDecorator(),
                     rememberViewModelStoreNavEntryDecorator()
                 ),
                 entryProvider = entryProvider {

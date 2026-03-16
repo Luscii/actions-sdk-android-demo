@@ -1,24 +1,23 @@
 [versions]
 agp = "8.10.1"
 desugarJdkLibs = "2.1.5"
-hilt = "2.57.1"
+hilt = "2.58"
 kotlin = "2.2.10"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.9.1"
+lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.10.1"
 composeBom = "2025.06.01"
 appcompat = "1.7.1"
 androidx-fragment = "1.8.8"
 material = "1.12.0"
-nav = "1.2.0"
-nav3Core = "1.0.0-alpha04"
+nav = "1.3.0"
+nav3Core = "1.0.1"
 kotlinSerialization = "2.1.21"
-kotlinxSerializationCore = "1.8.1"
-lifecycleViewmodelNav3 = "1.0.0-alpha02"
-luscii = "0.8.2"
+kotlinxSerializationCore = "1.10.0"
+lifecycleViewmodelNav3 = "2.10.0"
 ksp = "2.2.10-2.0.2"
 materialIcons = "1.7.8"
 
@@ -41,7 +40,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 # TODO: Remove version once TextField has TextFieldState parameter
-androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.4.0-alpha16" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.4.0" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
