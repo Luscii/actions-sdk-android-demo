@@ -116,6 +116,8 @@ private fun ActionList(
                         Text("isPlanned: ${it.isPlanned}")
 
                         Text("isExtra: ${it.isExtra}")
+
+                        Text("category: ${it.category}")
                     }
                 },
                 trailingContent = {
