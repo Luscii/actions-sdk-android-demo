@@ -18,7 +18,7 @@ nav3Core = "1.0.1"
 kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.10.0"
 lifecycleViewmodelNav3 = "2.10.0"
-luscii = "0.9.0"
+luscii = "0.10.0"
 ksp = "2.2.10-2.0.2"
 materialIcons = "1.7.8"
 
